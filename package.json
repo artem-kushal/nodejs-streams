@@ -1,0 +1,17 @@
+{
+  "name": "csv-to-json-parser",
+  "version": "1.0.0",
+  "description": "Node stream practical example",
+  "main": "index.js",
+  "scripts": {
+    "parse": "node index.js",
+    "generate-big-file": "node index.js --fileName d.csv"
+  },
+  "author": "Artsiom Kushal <stdart9@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^6.7.2",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "prettier-eslint": "^9.0.1"
+  }
+}
