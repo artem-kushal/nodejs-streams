@@ -37,7 +37,7 @@ readStream.on('data', chunk => {
 
   const partialData = lines.join('\r\n');
 
-  repeatedWriteChunk(partialData, 200000);
+  repeatedWriteChunk(partialData, 170000);
 });
 
 readStream.on('error', console.log);
