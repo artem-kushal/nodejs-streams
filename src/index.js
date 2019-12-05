@@ -5,6 +5,10 @@ const { Transform, pipeline } = require('stream');
 
 const pipelineAsync = util.promisify(pipeline);
 
+const BIG_FILE_FLAG = '--useBigFile';
+const isUseBigFile = process.argv.includes(BIG_FILE_FLAG);
+const fileName = isUseBigFile ? 'big-test' : 'test';
+
 let fieldNames = null;
 
 const convertToObject = data => {
@@ -58,8 +62,8 @@ const transformToJSON = () => {
   });
 };
 
-const readStream = fs.createReadStream(path.join(__dirname, '../assets/test.csv'));
-const writeStream = fs.createWriteStream(path.join(__dirname, '../assets/test.json'));
+const readStream = fs.createReadStream(path.join(__dirname, `../assets/${fileName}.csv`));
+const writeStream = fs.createWriteStream(path.join(__dirname, `../assets/${fileName}.json`));
 
 const errorHandler = err => console.error(err);
 const successHandler = () => console.log('File converted from csv to json.');

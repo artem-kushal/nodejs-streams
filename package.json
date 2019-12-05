@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "parse": "node index.js",
-    "generate-big-file": "node index.js --fileName d.csv"
+    "parse-big": "node index.js --useBigFile",
+    "generate-big-file": "node generate.js"
   },
   "author": "Artsiom Kushal <stdart9@gmail.com>",
   "license": "ISC",

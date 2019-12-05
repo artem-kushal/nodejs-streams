@@ -68,4 +68,6 @@ typings/
 
 uploads/*
 doc/*
+assets/big-test.csv
 assets/test.json
+assets/big-test.json
