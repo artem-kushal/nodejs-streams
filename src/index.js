@@ -68,6 +68,7 @@ const writeStream = fs.createWriteStream(path.join(__dirname, `../assets/${fileN
 const errorHandler = err => console.error(err);
 const successHandler = () => console.log('File converted from csv to json.');
 
+console.log('Csv file is converting to JSON...');
 // --------------------------------------------------------------------
 // We can handle errors for each stream or use pipeline for this reason.
 // --------------------------------------------------------------------
