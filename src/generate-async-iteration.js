@@ -4,7 +4,7 @@ const { once } = require('events');
 const util = require('util');
 const stream = require('stream');
 
-const finished = util.promisify(stream.finished); // (A)
+const finished = util.promisify(stream.finished);
 
 // This stream will take only one part of file.
 const readStream = fs.createReadStream(path.join(__dirname, '../assets/test.csv'), {
@@ -41,7 +41,7 @@ const writeChunk = async chunk => {
 
   const partialData = lines.join('\r\n');
 
-  await repeatedWriteChunk(partialData, 170000);
+  await repeatedWriteChunk(partialData, 17000);
 };
 
 const runGenerating = async readable => {

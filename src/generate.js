@@ -13,10 +13,10 @@ const repeatedWriteChunk = (data, repeatCount) => {
   if (repeatCount < 0) return writeStream.end();
 
   if (!writeStream.write(data)) {
-    return repeatedWriteChunk(data, repeatCount - 1);
-  } else {
     // https://nodejs.org/api/stream.html#stream_event_drain
     writeStream.once('drain', () => repeatedWriteChunk(data, repeatCount - 1));
+  } else {
+    return repeatedWriteChunk(data, repeatCount - 1);
   }
 };
 
