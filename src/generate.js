@@ -10,11 +10,9 @@ const readStream = fs.createReadStream(path.join(__dirname, '../assets/test.csv'
 const writeStream = fs.createWriteStream(path.join(__dirname, '../assets/big-test.csv'));
 
 const repeatedWriteChunk = (data, repeatCount) => {
-  const isWritten = writeStream.write(data);
-
   if (repeatCount < 0) return writeStream.end();
 
-  if (isWritten) {
+  if (!writeStream.write(data)) {
     return repeatedWriteChunk(data, repeatCount - 1);
   } else {
     // https://nodejs.org/api/stream.html#stream_event_drain
@@ -22,8 +20,7 @@ const repeatedWriteChunk = (data, repeatCount) => {
   }
 };
 
-readStream.on('data', chunk => {
-  console.log('Big csv file is generating...');
+const writeChunk = chunk => {
   let lines = chunk
     .toString('utf8')
     .trim()
@@ -38,6 +35,12 @@ readStream.on('data', chunk => {
   const partialData = lines.join('\r\n');
 
   repeatedWriteChunk(partialData, 170000);
+};
+
+readStream.on('data', chunk => {
+  console.log('Big csv file is generating...');
+
+  writeChunk(chunk);
 });
 
 readStream.on('error', console.log);
