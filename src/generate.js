@@ -14,14 +14,14 @@ const repeatedWriteChunk = (data, repeatCount) => {
 
   if (!writeStream.write(data)) {
     // https://nodejs.org/api/stream.html#stream_event_drain
-    writeStream.once('drain', () => repeatedWriteChunk(data, repeatCount - 1));
-  } else {
-    return repeatedWriteChunk(data, repeatCount - 1);
-  }
+    return writeStream.once('drain', () => repeatedWriteChunk(data, repeatCount - 1));
+  } 
+
+  return repeatedWriteChunk(data, repeatCount - 1);
 };
 
 const writeChunk = chunk => {
-  let lines = chunk
+  const lines = chunk
     .toString('utf8')
     .trim()
     .split('\r\n');
@@ -30,7 +30,7 @@ const writeChunk = chunk => {
   writeStream.write(`${fieldNamesLine}\r\n`);
 
   // Last line can be part of the next chunk first line, so remove it.
-  lastLine = lines.pop();
+  lines.pop();
 
   const partialData = lines.join('\r\n');
 

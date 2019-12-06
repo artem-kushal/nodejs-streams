@@ -11,11 +11,8 @@ const fileName = isUseBigFile ? 'big-test' : 'test';
 
 let fieldNames = null;
 
-const convertToObject = data => {
-  return fieldNames.reduce((res, fieldName, index) => {
-    return { ...res, [fieldName]: data[index].trim() };
-  }, {});
-};
+const convertToObject = data =>
+  fieldNames.reduce((res, fieldName, index) => ({ ...res, [fieldName]: data[index].trim() }), {});
 
 const convertChunkToJSON = (() => {
   let isFirstChunk = true;
@@ -24,7 +21,7 @@ const convertChunkToJSON = (() => {
   return chunk => {
     // This condition is for adding array bracket.
     const initialStartResString = isFirstChunk ? '[\n' : '';
-    let chunkString = chunk.toString('utf8').trim();
+    const chunkString = chunk.toString('utf8').trim();
     const lines = `${lastLine}${chunkString}`.split('\r\n');
 
     if (isFirstChunk) {

@@ -4,8 +4,11 @@
   "description": "Node stream practical example",
   "main": "index.js",
   "scripts": {
-    "parse": "node index.js",
-    "parse-big": "node index.js --useBigFile",
+    "parse": "node parse.js",
+    "parse-with-iterator": "node parse-async-iteration.js",
+    "parse-big": "node parse.js --useBigFile",
+    "parse-big-with-iterator": "node parse-async-iteration.js --useBigFile",
+    "generate-big-file-with-iterator": "node generate-async-iteration.js",
     "generate-big-file": "node generate.js"
   },
   "author": "Artsiom Kushal <stdart9@gmail.com>",
@@ -13,6 +16,8 @@
   "devDependencies": {
     "eslint": "^6.7.2",
     "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-import": "^2.18.2",
     "prettier-eslint": "^9.0.1"
   }
 }

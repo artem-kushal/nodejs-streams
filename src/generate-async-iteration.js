@@ -15,7 +15,7 @@ const readStream = fs.createReadStream(path.join(__dirname, '../assets/test.csv'
 const writeStream = fs.createWriteStream(path.join(__dirname, '../assets/big-test.csv'));
 
 const repeatedWriteChunk = async (data, repeatCount) => {
-  for (let i = 0; i < repeatCount; i++) {
+  for (let i = 0; i < repeatCount; i = +1) {
     if (!writeStream.write(data)) {
       // https://nodejs.org/api/stream.html#stream_event_drain
       await once(writeStream, 'drain');
@@ -27,8 +27,8 @@ const repeatedWriteChunk = async (data, repeatCount) => {
   await finished(writeStream);
 };
 
-const writeChunk = async chunk => {
-  let lines = chunk
+const writeChunk = async (chunk) => {
+  const lines = chunk
     .toString('utf8')
     .trim()
     .split('\r\n');
@@ -37,14 +37,14 @@ const writeChunk = async chunk => {
   writeStream.write(`${fieldNamesLine}\r\n`);
 
   // Last line can be part of the next chunk first line, so remove it.
-  lastLine = lines.pop();
+  lines.pop();
 
   const partialData = lines.join('\r\n');
 
-  await repeatedWriteChunk(partialData, 17000);
+  await repeatedWriteChunk(partialData, 170000);
 };
 
-const runGenerating = async readable => {
+const runGenerating = async (readable) => {
   try {
     console.log('Big csv file is generating...');
 
